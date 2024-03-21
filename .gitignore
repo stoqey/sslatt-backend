@@ -1,0 +1,77 @@
+# OSX
+#
+.DS_Store
+
+# Xcode
+#
+build/
+
+
+# node.js
+#
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Expo
+.expo/*
+web-build/
+
+# @generated: @expo/next-adapter@2.1.52
+/.expo/*
+# Expo Web
+/web-build/*
+# Expo Native
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+# Next.js
+/.next/*
+/out/
+# Next.js production
+/build/
+# Next.js dependencies
+/.pnp
+.pnp.js
+# @end @expo/next-adapter
+
+# Firebase
+serviceAccountKey.json*
+firebase.config.js*
+firebase.config.ts*
+firebase.config.json*
+*secret.js*
+*secret.ts*
+service.account.json*
+
+.env
+
+
+# Backend
+.idea/
+.vscode/
+node_modules/
+node_modules/**/*
+build/
+tmp/
+temp/
+keys/
+*.env
+
+# Web
+*.next
+*.expo
+npm-debug.*
+yarn-error.*
+*.jks
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+web-report/
+
+src/_config/*

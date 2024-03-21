@@ -1,0 +1,17 @@
+/login 
+   - not store, no 2 auth    --> home
+   - is store                --> pgp 2 auth ----> home
+   - is 2Auth enabled        --> pgp 2 auth ----> home
+
+
+/signup -> view (mnemonic)  -> savePGP / skip
+
+/forgotPw
+  - if has 2 auth enabled  ----> pgp 2 auth        ----> resetPW ---->home
+  - default mnemonic       ----> verify mnemonic   ----> resetPW ---->home
+
+/settings/resetPw (oldPw, newPW)
+  - if has 2 auth enabled  ----> pgp 2 auth        ----> resetPW ---->home
+  - default mnemonic       ----> verify mnemonic   ----> resetPW ---->home
+
+

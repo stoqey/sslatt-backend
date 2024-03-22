@@ -73,5 +73,3 @@ yarn-error.*
 *.orig.*
 web-build/
 web-report/
-
-src/_config/*

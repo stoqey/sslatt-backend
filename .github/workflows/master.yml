@@ -19,7 +19,7 @@ env:
   GKE_SA_KEY: ${{ secrets.GKE_SA_KEY }}
 
 jobs:
-  api:
+  gke-build-publish-deploy:
     name: deploy
     runs-on: ubuntu-latest
     container: catthehacker/ubuntu:act-latest

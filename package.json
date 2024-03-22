@@ -12,7 +12,7 @@
     "clean": "rm -rf build",
     "build:server": "tsc --skipLibCheck",
     "build": "yarn clean && yarn build:server",
-    "docker": "act --job api --secret-file .env --container-architecture linux/amd64",
+    "docker": "act --job api --secret-file .env.prod --container-architecture linux/amd64",
     "docker:fastdfs": "act --job fastdfs-backup --secret-file .env --container-architecture linux/amd64 -v"
   },
   "peerDependencies": {

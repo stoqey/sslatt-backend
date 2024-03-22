@@ -60,7 +60,7 @@ tmp/
 temp/
 keys/
 *.env
-
+*.env*
 # Web
 *.next
 *.expo

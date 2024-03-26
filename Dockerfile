@@ -2,10 +2,9 @@ FROM amd64/node:18.17 AS builder
 
 WORKDIR /srv
 
-RUN npm -v
 RUN yarn -v
 COPY . .
-RUN yarn
+RUN yarn --ignore-engines
 
 RUN yarn build
 

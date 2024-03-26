@@ -6,13 +6,10 @@ on:
       - "master"
 
 env:
-  REGISTRY: us-docker.pkg.dev/xxcloud/app/sslatt-backend
-  IMAGE: prod
-  DEPLOYMENT: sslatt-backend
-
+  REGISTRY: ${{ secrets.REGISTRY }}
+  IMAGE: ${{ secrets.IMAGE }}
+  DEPLOYMENT: ${{ secrets.DEPLOYMENT }}
   CLUSTER_NAME: ${{ secrets.CLUSTER_NAME }}
-
-  NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
   GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
   GKE_ZONE: ${{ secrets.GKE_ZONE }}
   GKE_ZONE_CLUSTER: ${{ secrets.GKE_ZONE_CLUSTER }}
@@ -89,7 +86,6 @@ jobs:
           build-args: |
             GITHUB_SHA=${{ github.sha }}
             GITHUB_REF=${{ github.ref }}
-            NPM_AUTH_TOKEN=${{ secrets.NPM_AUTH_TOKEN }}
 
       - name: Move cache
         run: |

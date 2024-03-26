@@ -40,15 +40,16 @@ interface SaveFileToStorageType {
     localFile: string;
     filename?: string;
     owner?: string;
+    mimetype?: string;
 };
 
 const saveFileToStorage = async (args: SaveFileToStorageType) => {
-    const { localFile, filename, owner } = args;
+    const { localFile, filename, owner, mimetype: ogMimetype } = args;
     const newFileNameID = generateUUID();
     const fileExt = localFile.split('.').pop();
     const fullfilename = `${newFileNameID}.${fileExt}`;
 
-    const mimetype = mime.getType(localFile);
+    const mimetype = !isEmpty(ogMimetype)? ogMimetype: mime.getType(localFile);
 
     let savedToCloudUrl = null;
     if (isFastDFS) {
@@ -93,10 +94,10 @@ const saveFileToStorage = async (args: SaveFileToStorageType) => {
 export const mediaRoadman = async (args: RoadmanBuild): Promise<RoadmanBuild> => {
     const { app } = args;
 
-    app.use(express.static('upload'))
+    app.use(`/${uploadDirname}`, express.static(uploadDirname))
 
     app.post('/upload', cors({ origin: "*", credentials: true }), isAuthRest, upload.array('files', 10), async (req: any, res: any) => {
-
+        
         const owner = _get(req, "payload.userId");
 
         if (!req.files || req.files.length === 0) {
@@ -107,14 +108,15 @@ export const mediaRoadman = async (args: RoadmanBuild): Promise<RoadmanBuild> =>
             const uploadedFiles = await Promise.all(req.files.map((file: any) => saveFileToStorage({
                 localFile: `${uploadDirname}/${file.filename}`,
                 filename: file.originalname,
-                owner
+                owner,
+                mimetype: file.mimetype
             })));
 
             res.status(200).json(uploadedFiles);
 
         }
         catch (error) {
-            console.log("error uploading files")
+            console.log("error uploading files", error)
             return res.status(400).send('Error uploading files');
         }
 

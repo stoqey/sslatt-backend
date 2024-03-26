@@ -73,3 +73,5 @@ yarn-error.*
 *.orig.*
 web-build/
 web-report/
+
+/uploads/*

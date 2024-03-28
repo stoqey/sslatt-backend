@@ -632,10 +632,10 @@
     jsonwebtoken "^8.5.1"
     reflect-metadata "^0.1.13"
 
-"@roadmanjs/chat@^0.0.63":
-  version "0.0.63"
-  resolved "https://registry.yarnpkg.com/@roadmanjs/chat/-/chat-0.0.63.tgz#7ca7b30d2d18ee740571b7ca5b5a809daf363a4b"
-  integrity sha512-/0HQ8TckPp8/B/4+WDahM7BwF8MV6OP7qOeBe6v/iJrbxClUiVQ/CnsDKHCCq7uKCgVsVnFyrIGxlk8RugrDrg==
+"@roadmanjs/chat@^0.0.64":
+  version "0.0.64"
+  resolved "https://registry.yarnpkg.com/@roadmanjs/chat/-/chat-0.0.64.tgz#1539d51db18df0321768841c77e798f25ba37344"
+  integrity sha512-ggHmYSnPE2cAt0vZiS81JsjyGbgrLRbX5NPyRloJhzqiakwfCnBK/AFwSA2Z7BN46xcKaVURv7bktOt9pEyGlw==
   dependencies:
     "@roadmanjs/auth" "^0.0.27"
     "@roadmanjs/couchset" "^0.0.9"

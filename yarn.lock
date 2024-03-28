@@ -816,10 +816,10 @@
     shelljs "^0.8.5"
     ts-morph "^13.0.3"
 
-"@roadmanjs/wallet@^0.0.70":
-  version "0.0.70"
-  resolved "https://registry.yarnpkg.com/@roadmanjs/wallet/-/wallet-0.0.70.tgz#edf9fa3a85703503eb6e7f04d9c30a7510d6c5b5"
-  integrity sha512-oPyqkFK9jFPuyFhpQe+630aQA3IhT0vuhPlpiOep4UA6mmU3zcw9tACvemAMfuFZ2UAdJHhYZpoqeaAcHW9bGg==
+"@roadmanjs/wallet@^0.0.74":
+  version "0.0.74"
+  resolved "https://registry.yarnpkg.com/@roadmanjs/wallet/-/wallet-0.0.74.tgz#a18406e0f772e1e638249b2c66b91defca8add60"
+  integrity sha512-d76CvT0GxDdiZAdrehT265r1U/MeNRvL6YT5s00oOkXvhLWVwIaprNwJA3oLFfrD2lIo0z8sfCt0O6TomWykHA==
   dependencies:
     "@nowpaymentsio/nowpayments-api-js" "^1.0.5"
     "@roadmanjs/auth" "^0.0.32"

@@ -2,15 +2,14 @@ import 'cross-fetch/polyfill';
 import "reflect-metadata";
 import "dotenv/config";
 
+import { OrderRatingResolver, OrderResolver } from './order';
+import { RoadmanBuild, log, roadman } from "roadman";
 import {
-  BtcpayserverResolver,
   TransactionDefaultResolver,
   btcpayserverRoadman,
   getWalletResolvers,
   moneroserverRoadman,
 } from "@roadmanjs/wallet";
-import { OrderRatingResolver, OrderResolver } from './order';
-import { RoadmanBuild, log, roadman } from "roadman";
 import { WithdrawRequestAdminResolver, WithdrawRequestResolver } from './withdrawRequest';
 import { get as _get, isEmpty } from "lodash";
 
@@ -44,7 +43,6 @@ const resolvers = [
   WithdrawRequestAdminResolver,
   AdCategoryResolver,
   CountryResolver,
-  BtcpayserverResolver,
   VendorResolver,
   SettingsResolver,
   TransactionDefaultResolver,

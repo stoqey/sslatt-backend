@@ -23,10 +23,12 @@ import { UserModel, isAuth } from "@roadmanjs/auth";
 import AdsListingModel from "../listing/AdsListing.model";
 import { compact, isEmpty } from "lodash";
 import { finalizeOrder, refundOrder } from "./order.methods";
-import { WalletModel, fetchRates, updateWallet } from "@roadmanjs/wallet";
+import { fetchRates } from "@roadmanjs/wallet/dist/processors/kraken/rates"
+import { WalletModel, updateWallet } from "@roadmanjs/wallet";
 import OrderRatingModel from "./orderRating.model";
 import { encryptCode, getVerifiedKey } from "../auth/Pgp.methods";
 import { getSiteSettings } from "../settings/settings.methods";
+import { orderCancelledNotification, orderCreatedNotification } from "./order.notifications";
 
 
 @Resolver()
@@ -280,6 +282,9 @@ export class OrderResolver {
         currency: walletCurrency,
       });
 
+      // TODO remove after notification test
+      await orderCreatedNotification(createdOrUpdate);
+
       return { data: createdOrUpdate, success: true };
 
     } catch (error) {
@@ -316,6 +321,9 @@ export class OrderResolver {
         ...currentOrder,
         reason,
       });
+
+      // TODO delete after notification test
+      await orderCancelledNotification(currentOrder);
 
       return { success: true, data: updateOrder };
 

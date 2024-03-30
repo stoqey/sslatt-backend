@@ -1,5 +1,7 @@
-import { WalletModel, createFindWallet, fetchRates } from "@roadmanjs/wallet";
 import { get as _get, flatten, isEmpty } from "lodash";
+
+import { createFindWallet } from "@roadmanjs/wallet";
+import { fetchRates } from "@roadmanjs/wallet/dist/processors/kraken/rates"
 
 // TODO default wallets
 export const getAllWalletsUsd = async (owner: string, currencies = ["BTC"]): Promise<any> => {

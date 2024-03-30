@@ -10,12 +10,12 @@ import _get from 'lodash/get';
 import pickBy from 'lodash/pickBy';
 import identity from 'lodash/identity';
 import { log } from '@roadmanjs/logs';
-import NotificationModel, { NotificationType } from './notification.model';
+import NotificationModel, { NotificationModelName, Notification } from './notification.model';
 import { ContextType, isAuth } from '@roadmanjs/auth';
 import { CouchbaseConnection, getPagination } from 'couchset';
 import { awaitTo } from 'couchset/dist/utils';
 
-const NotificationPagination = getPagination(NotificationType);
+const NotificationPagination = getPagination(Notification);
 @Resolver()
 export class NotificationResolver {
     // TODO move this couchset when byTime Updated
@@ -23,14 +23,14 @@ export class NotificationResolver {
     @UseMiddleware(isAuth)
     async notifications(
         @Ctx() ctx: ContextType,
-        @Arg('read', () => String, { nullable: true }) read?: boolean, // todo readNotification
+        @Arg('read', () => Boolean, { nullable: true }) read?: boolean, // todo readNotification
         @Arg('filter', () => String, { nullable: true }) filter?: string,
         @Arg('sort', () => String, { nullable: true }) sortArg?: string,
         @Arg('before', () => Date, { nullable: true }) before?: Date,
         @Arg('after', () => Date, { nullable: true }) after?: Date,
         @Arg('limit', () => Number, { nullable: true }) limitArg?: number
-    ): Promise<{ items: NotificationType[]; hasNext?: boolean; params?: any }> {
-        const notificationModelName = NotificationType.name;
+    ): Promise<{ items: Notification[]; hasNext?: boolean; params?: any }> {
+        const notificationModelName = NotificationModelName;
         const owner = _get(ctx, 'payload.userId', '');
         const bucket = CouchbaseConnection.Instance.bucketName;
         const sign = before ? '<=' : '>=';

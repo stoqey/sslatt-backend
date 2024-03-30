@@ -4,7 +4,7 @@ export const NotificationModelName = 'Notification';
 
 @InputType('NotificationInput')
 @ObjectType()
-export class NotificationType {
+export class Notification {
     @Field(() => String, { nullable: true })
     id?: string = '';
 
@@ -30,7 +30,7 @@ export class NotificationType {
     read = false;
 }
 
-export const NotificationModel: Model = new Model(NotificationModelName, { graphqlType: NotificationType });
+export const NotificationModel: Model = new Model(NotificationModelName, { graphqlType: Notification });
 
 // TODO use automatic Notification when couchset byTime is completed
 export const {

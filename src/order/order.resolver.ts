@@ -28,7 +28,7 @@ import { WalletModel, updateWallet } from "@roadmanjs/wallet";
 import OrderRatingModel from "./orderRating.model";
 import { encryptCode, getVerifiedKey } from "../auth/Pgp.methods";
 import { getSiteSettings } from "../settings/settings.methods";
-import { orderCancelledNotification, orderCreatedNotification } from "./order.notifications";
+import { orderNotification } from "./order.notifications";
 
 
 @Resolver()
@@ -282,8 +282,7 @@ export class OrderResolver {
         currency: walletCurrency,
       });
 
-      // TODO remove after notification test
-      await orderCreatedNotification(createdOrUpdate);
+      await orderNotification(createdOrUpdate, "New order has been created");
 
       return { data: createdOrUpdate, success: true };
 
@@ -322,8 +321,7 @@ export class OrderResolver {
         reason,
       });
 
-      // TODO delete after notification test
-      await orderCancelledNotification(currentOrder);
+      await orderNotification(currentOrder, "Order has been cancelled");
 
       return { success: true, data: updateOrder };
 

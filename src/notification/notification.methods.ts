@@ -1,8 +1,9 @@
 import { Notification, NotificationModel } from "./notification.model";
+import { compact, flattenDeep, isEmpty } from "lodash";
 
 import { awaitTo } from "couchset/dist/utils";
 import { createUpdate } from "couchset";
-import { isEmpty } from "lodash";
+import { updateBadgeCount } from "../badge/Badge.methods";
 
 export const createNotification = async (notification: Notification, silent = false): Promise<Notification | null> => {
     try {
@@ -27,25 +28,39 @@ export const createNotification = async (notification: Notification, silent = fa
     }
 }
 
-export const updateReadStatus = async (query: any): Promise<Notification[] | null> => {
+interface UpdateReadStatus {
+    limit?: number;
+    read?: boolean;
+};
+
+export const updateReadStatus = async (query: any, opt?: UpdateReadStatus): Promise<Notification[] | null> => {
     try {
         const notifications = await NotificationModel.pagination({
             where: query,
-            limit: 1000, // TODO pagination
+            limit: opt?.limit || 1000, // TODO pagination
         });
 
         if (isEmpty(notifications)) {
             throw new Error("error getting notifications");
         }
 
-        const updatedNotifications = await Promise.all(notifications.map(async (notification) => {
-            return await NotificationModel.updateById<Notification>(notification.id, {
+        const updateNotificationsNBadge = await Promise.all(notifications.map(async (notification) => {
+            const [errorUpdate, updatedNotifications] = await awaitTo(NotificationModel.updateById<Notification>(notification.id, {
                 ...notification,
-                read: true,
-            });
+                read: opt?.read || true,
+            }));
+
+            if (errorUpdate || !updatedNotifications) {
+                console.log("error updateNotificationsNBadge",errorUpdate)
+                return null;
+            }
+
+            await updateBadgeCount(notification.owner as string, Notification.name, -1)
+
+            return updatedNotifications;
         }));
 
-        return updatedNotifications;
+        return compact(updateNotificationsNBadge);
 
     } catch (error) {
         console.error("error updating notification", error);

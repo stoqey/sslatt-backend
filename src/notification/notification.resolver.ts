@@ -14,6 +14,8 @@ import NotificationModel, { NotificationModelName, Notification } from './notifi
 import { ContextType, isAuth } from '@roadmanjs/auth';
 import { CouchbaseConnection, getPagination } from 'couchset';
 import { awaitTo } from 'couchset/dist/utils';
+import { updateReadStatus } from './notification.methods';
+import { isEmpty } from 'lodash';
 
 const NotificationPagination = getPagination(Notification);
 @Resolver()
@@ -93,6 +95,65 @@ export class NotificationResolver {
             log('error getting notifications', error);
             return { items: [], hasNext: false, params: copyParams };
         }
+    }
+
+    @Query(() => [Notification])
+    @UseMiddleware(isAuth)
+    async readNotifications(
+        @Ctx() ctx: ContextType,
+        @Arg('id', () => String, { nullable: true }) id?: string,
+        @Arg('before', () => Date, { nullable: true }) before?: Date,
+        @Arg('limit', () => Number, { nullable: true }) limit: number = 1000
+    ): Promise<Notification[] | null> {
+        try {
+            const owner = _get(ctx, 'payload.userId', '');
+
+            let updatedNotifications: Notification[] | null = [];
+
+            if (id) {
+                updatedNotifications = await updateReadStatus({ id });
+
+            } else {
+                if (!owner || !before) {
+                    throw new Error("owner and before date are required");
+                }
+
+                updatedNotifications = await updateReadStatus({
+                    owner,
+                    before: { $lte: before },
+                }, { limit });
+
+            }
+            return updatedNotifications;
+        }
+        catch (error) {
+            log("error reading notification", error);
+            return null;
+        }
+
+    }
+
+    @Query(() => Notification, { nullable: true })
+    @UseMiddleware(isAuth)
+    async getNotification(
+        @Arg('id', () => String, { nullable: false }) id: string,
+    ): Promise<Notification | null> {
+        try {
+            if (!id || isEmpty(id)) {
+                throw new Error("id is required");
+            }
+
+            const [error, notification] = await awaitTo(NotificationModel.findById(id));
+            if (error) {
+                throw error;
+            }
+            return notification;
+        }
+        catch (error) {
+            log("error reading notification", error);
+            return null;
+        }
+
     }
 }
 

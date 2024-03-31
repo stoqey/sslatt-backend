@@ -15,7 +15,9 @@ import { get as _get, isEmpty } from "lodash";
 
 import AdCategoryResolver from "./listing/AdCategory.resolver";
 import { AdsListingResolver } from './listing/AdsListing.model';
+import { BadgeResolver } from './badge/Badge.resolver';
 import CountryResolver from './country/Country.resolver';
+import { NotificationResolver } from './notification';
 import PgpResolver from './auth/Pgp.resolver';
 import SettingsResolver from './settings/settings.resolver';
 import UserAuthPwResolver from './auth/User.resolver.pw';
@@ -46,7 +48,7 @@ const resolvers = [
   VendorResolver,
   SettingsResolver,
   TransactionDefaultResolver,
-  PgpResolver, UserAuthResolver, UserAuthPwResolver
+  PgpResolver, UserAuthResolver, UserAuthPwResolver, NotificationResolver, BadgeResolver
 ];
 
 const app = async (args: RoadmanBuild): Promise<RoadmanBuild> => {

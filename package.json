@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@roadmanjs/auth": "^0.0.35",
-    "@roadmanjs/chat": "^0.0.64",
+    "@roadmanjs/chat": "^0.0.66",
     "@roadmanjs/couchset": "^0.0.9",
     "@roadmanjs/firebase-admin": "^0.0.28",
     "@roadmanjs/fluxer": "^0.0.5",

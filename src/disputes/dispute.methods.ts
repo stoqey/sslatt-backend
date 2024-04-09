@@ -2,8 +2,8 @@ import { TransactionModel, updateWallet } from "@roadmanjs/wallet";
 import { isEmpty } from "lodash";
 import { log } from "roadman";
 import DisputeModel, { Dispute } from "./dispute.model";
-import { RequestStatus } from "src/shared";
-import { OrderModel } from "src/order";
+import { RequestStatus } from "../shared";
+import { OrderModel } from "../order";
 
 export const finalizeDispute = async (disputeId: string, refund: boolean = false): Promise<Dispute | null> => {
     try {

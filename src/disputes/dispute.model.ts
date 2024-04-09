@@ -29,15 +29,15 @@ export class Dispute {
   deleted?: boolean = false;
   // Automatic
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   status?: string = "";
 
   // if status === cancelled
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   reason?: string = "";
 
-  @Field({ nullable: true })
-  order?: OrderType | string = "";
+  @Field(() => String, { nullable: true })
+  order?: string | OrderType = "";
 
 }
 

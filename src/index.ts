@@ -31,6 +31,7 @@ import { getChatResolvers } from "@roadmanjs/chat";
 import { getSocialResolvers } from "@roadmanjs/social";
 import { mediaRoadman } from './media/media.app';
 import { walletRouter as moneroxWalletRouter } from "@roadmanjs/monerox";
+import { DisputeAdminResolver, DisputesResolver } from './disputes';
 
 const resolvers = [
   ...getAuthResolvers(),
@@ -48,7 +49,7 @@ const resolvers = [
   VendorResolver,
   SettingsResolver,
   TransactionDefaultResolver,
-  PgpResolver, UserAuthResolver, UserAuthPwResolver, NotificationResolver, BadgeResolver
+  PgpResolver, UserAuthResolver, UserAuthPwResolver, NotificationResolver, BadgeResolver, DisputeAdminResolver, DisputesResolver
 ];
 
 const app = async (args: RoadmanBuild): Promise<RoadmanBuild> => {

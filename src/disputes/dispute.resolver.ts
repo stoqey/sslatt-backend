@@ -19,7 +19,7 @@ import { Dispute, DisputeOutputPagination, DisputeOutput, DisputeModel } from ".
 import { log } from "@roadmanjs/logs";
 import { UserModel, isAuth } from "@roadmanjs/auth";
 import { isEmpty } from "lodash";
-import { OrderModel, OrderStatus, OrderType } from "src/order";
+import { OrderModel, OrderStatus, OrderType } from "../order";
 import { RequestStatus } from "../shared";
 
 

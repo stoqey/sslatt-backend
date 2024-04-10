@@ -1,11 +1,11 @@
-import { SiteSettings, SiteSettingsModel } from "./settings.model";
+import { SiteSettings, SiteSettingsModel, siteSettingsClientSelectors } from "./settings.model";
 
 import { awaitTo } from "couchset/dist/utils";
 import { initSiteSettings } from "../_startup/startup"
-import { isEmpty } from "lodash";
+import { isEmpty, pick } from "lodash";
 import { sign } from 'jsonwebtoken';
 
-export const getSiteSettings = async (): Promise<SiteSettings | null> => {
+export const getSiteSettings = async (client = false): Promise<SiteSettings | null> => {
     try {
         const [err, settings] = await awaitTo(SiteSettingsModel.findById(initSiteSettings.id));
 
@@ -17,6 +17,10 @@ export const getSiteSettings = async (): Promise<SiteSettings | null> => {
             throw new Error("error getting site settings");
         }
 
+        if(client){
+            return pick(settings, siteSettingsClientSelectors) as SiteSettings;
+        }
+        
         return settings;
     } catch (error) {
         console.error("error getting site settings", error);

@@ -20,13 +20,13 @@ export class SettingsResolver {
   @Query(() => FeePrices, { nullable: false })
   @UseMiddleware(isAuth)
   async getFeePrices(): Promise<FeePrices> {
-    const siteSettings = await getSiteSettings();
+    const siteSettings = await getSiteSettings(true);
     return siteSettings?.feePrices ? siteSettings.feePrices : initSiteSettings.feePrices;
   }
 
   @Query(() => SiteSettings, { nullable: false })
   async getSiteSettings(): Promise<SiteSettings> {
-    const siteSettings = await getSiteSettings();
+    const siteSettings = await getSiteSettings(true);
     return siteSettings ? siteSettings : initSiteSettings;
   }
 

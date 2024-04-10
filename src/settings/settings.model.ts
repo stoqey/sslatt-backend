@@ -44,6 +44,9 @@ export class SiteSettings {
     adCount?: number = 0;
 
     @Field(() => String, { nullable: true })
+    logo?: string = "";
+
+    @Field(() => String, { nullable: true })
     name?: string = "";
 
     @Field(() => String, { nullable: true })
@@ -131,6 +134,7 @@ export const siteSettingsClientSelectors = [
     "vendorCount",
     "userCount",
     "adCount",
+    "logo",
     "name",
     "slogan",
     "description",

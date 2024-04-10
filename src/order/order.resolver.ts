@@ -231,7 +231,7 @@ export class OrderResolver {
       };
 
       const { price: adPriceUsd } = ad;
-      const feePerc = siteSettings.feePrices.checkoutFeePerc;
+      const feePerc = siteSettings.feePrices?.checkoutFeePerc || 0;
       const priceXQtyUsd = adPriceUsd * quantity;
       const feeUsd = (feePerc / 100) * priceXQtyUsd;
       const orderPriceTotalUsd = priceXQtyUsd + feeUsd;

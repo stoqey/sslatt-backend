@@ -1,5 +1,6 @@
 import { Field, InputType, Model, ObjectType } from "couchset";
 
+@InputType("WithdrawMinInput")
 @ObjectType()
 class WithdrawMin {
     @Field(() => Number, { nullable: false })
@@ -10,6 +11,7 @@ class WithdrawMin {
 
 };
 
+@InputType("FeePricesInput")
 @ObjectType()
 export class FeePrices {
     @Field(() => WithdrawMin, { nullable: false })
@@ -25,14 +27,15 @@ export class FeePrices {
 @InputType("SiteSettingsInput")
 @ObjectType()
 export class SiteSettings {
-    @Field(() => String, { nullable: false })
+    @Field(() => String, { nullable: true })
     id: string = "";
 
-    @Field(() => Number, { nullable: false })
+    @Field(() => Number, { nullable: true })
     vendorBond: number = 600;
 
-    @Field(() => FeePrices, { nullable: false })
-    feePrices: FeePrices = null as any;
+    // @deprecated
+    @Field(() => FeePrices, { nullable: true })
+    feePrices?: FeePrices = null as any;
 
     @Field(() => Number, { nullable: true })
     vendorCount?: number = 0;
@@ -54,6 +57,18 @@ export class SiteSettings {
 
     @Field(() => String, { nullable: true })
     description?: string = "";
+
+    @Field(() => Number, { nullable: true })
+    WITHDRAW_FEE_PERC?: number = 0;
+
+    @Field(() => Number, { nullable: true })
+    CHECKOUT_FEE_PERC?: number = 0;
+
+    @Field(() => Number, { nullable: true })
+    XMR_WITHDRAW_MIN?: number = 0;
+
+    @Field(() => Number, { nullable: true })
+    BTC_WITHDRAW_MIN?: number = 0.000101;
 
     @Field(() => Boolean, { nullable: true })
     ENABLE_BTC?: boolean = false;

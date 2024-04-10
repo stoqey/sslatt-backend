@@ -17,11 +17,12 @@ import { isAuth } from "@roadmanjs/auth";
 @Resolver()
 export class SettingsResolver {
 
+  // @deprecated
   @Query(() => FeePrices, { nullable: false })
   @UseMiddleware(isAuth)
   async getFeePrices(): Promise<FeePrices> {
     const siteSettings = await getSiteSettings(true);
-    return siteSettings?.feePrices ? siteSettings.feePrices : initSiteSettings.feePrices;
+    return (siteSettings?.feePrices ? siteSettings.feePrices : initSiteSettings.feePrices) as any;
   }
 
   @Query(() => SiteSettings, { nullable: false })

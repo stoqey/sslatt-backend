@@ -32,6 +32,7 @@ import { getSocialResolvers } from "@roadmanjs/social";
 import { mediaRoadman } from './media/media.app';
 import { walletRouter as moneroxWalletRouter } from "@roadmanjs/monerox";
 import { DisputeAdminResolver, DisputesResolver } from './disputes';
+import AdminSettingsResolver from './settings/settings.resolver.admin';
 
 const resolvers = [
   ...getAuthResolvers(),
@@ -48,6 +49,7 @@ const resolvers = [
   CountryResolver,
   VendorResolver,
   SettingsResolver,
+  AdminSettingsResolver,
   TransactionDefaultResolver,
   PgpResolver, UserAuthResolver, UserAuthPwResolver, NotificationResolver, BadgeResolver, DisputeAdminResolver, DisputesResolver
 ];

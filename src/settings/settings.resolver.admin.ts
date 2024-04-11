@@ -11,7 +11,7 @@ import {
   Resolver,
   UseMiddleware,
 } from "type-graphql";
-import { getCSRFToken, getSiteSettings } from "./settings.methods";
+import { emitSiteSettingsRefresh, getCSRFToken, getSiteSettings } from "./settings.methods";
 
 import _get from "lodash/get";
 import { initSiteSettings } from "../_startup/startup";
@@ -50,6 +50,8 @@ export class AdminSettingsResolver {
       const updatedSiteSettings = await SiteSettingsModel.updateById(siteSettings.id, newSiteSettings);
 
       // TODO restart
+      // TODO check if backend envs changed
+      emitSiteSettingsRefresh();
       return { success: true, data: updatedSiteSettings };
 
     }

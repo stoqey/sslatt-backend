@@ -33,6 +33,8 @@ import { mediaRoadman } from './media/media.app';
 import { walletRouter as moneroxWalletRouter } from "@roadmanjs/monerox";
 import { DisputeAdminResolver, DisputesResolver } from './disputes';
 import AdminSettingsResolver from './settings/settings.resolver.admin';
+import { initSiteSettings } from './_config/site';
+import { getSiteSettings, initConfigSiteSettings } from './settings/settings.methods';
 
 const resolvers = [
   ...getAuthResolvers(),
@@ -57,10 +59,20 @@ const resolvers = [
 const app = async (args: RoadmanBuild): Promise<RoadmanBuild> => {
   const { app } = args;
   app.use("/wallet", moneroxWalletRouter);
+
+  app.get("/client/settings", async (req, res) => {
+    const siteSettings = await getSiteSettings(true);
+    const settings = siteSettings ? siteSettings : initSiteSettings;
+    res.json(settings);
+  });
+
   return args;
 }
 
 const run = async () => {
+
+  await initConfigSiteSettings();
+
   const roadmanStarted = await roadman({
     roadmen: [
       app,

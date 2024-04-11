@@ -1,9 +1,51 @@
 import { SiteSettings, SiteSettingsModel, siteSettingsClientSelectors } from "./settings.model";
-
+import Queue from "bull"
 import { awaitTo } from "couchset/dist/utils";
 import { initSiteSettings } from "../_startup/startup"
-import { isEmpty, pick } from "lodash";
+import { isEmpty, map, omit, pick, set } from "lodash";
 import { sign } from 'jsonwebtoken';
+import { REDIS_URL, verbose } from 'roadman';
+import { couchsetRoadman } from "@roadmanjs/couchset";
+
+const queueName = "site-stats";
+const siteStatsQueue = new Queue(queueName, REDIS_URL, {});
+siteStatsQueue.on(`global:${queueName}:refresh`, () => {
+    console.log(`global:${queueName}:refresh`);
+    process.exit(0);
+});
+siteStatsQueue.process(async (job, done) => {
+    console.log(`Processing job ${job.id}`);
+    console.log(job.data);
+    done();
+});
+
+export const initConfigSiteSettings = async () => {
+    await couchsetRoadman(null as any);
+    const siteSettings = await getSiteSettings();
+    if (siteSettings) {
+      const config = omit(siteSettings, ["feePrices", "_type", "_scope"]);
+  
+      const configEnvs = map(config, (value, key) => {
+        return { [key]: value?.toString() };
+      }).reduce((acc, curr) => {
+        return { ...acc, ...curr };
+      }, {});
+  
+      verbose("configEnvs", configEnvs);
+  
+      process.env = { ...process.env, ...configEnvs };
+    };
+}
+
+export const emitSiteSettingsRefresh = (): void => {
+    setTimeout(() => {
+        const job = siteStatsQueue.emit(`global:${queueName}:refresh`);
+        return job;
+    }, 3000);
+}
+// export const siteStatsQueue = () => {
+
+// };
 
 export const getSiteSettings = async (client = false): Promise<SiteSettings | null> => {
     try {
@@ -17,10 +59,10 @@ export const getSiteSettings = async (client = false): Promise<SiteSettings | nu
             throw new Error("error getting site settings");
         }
 
-        if(client){
+        if (client) {
             return pick(settings, siteSettingsClientSelectors) as SiteSettings;
         }
-        
+
         return settings;
     } catch (error) {
         console.error("error getting site settings", error);

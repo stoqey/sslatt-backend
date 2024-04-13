@@ -5,7 +5,7 @@ import "dotenv/config";
 
 import { Query, Resolver } from 'type-graphql';
 import { RoadmanBuild, roadman, log } from "roadman";
-import { walletRouter as moneroxWalletRouter } from "@roadmanjs/monerox";
+import { walletRouter as moneroxWalletRouter, listenMain } from "@roadmanjs/monerox";
 import { initConfigSiteSettings } from "./settings/settings.methods";
 
 @Resolver()
@@ -35,6 +35,7 @@ const run = async () => {
     });
 
     if(roadmanStarted){
+        await listenMain();
         log("roadmanStarted", roadmanStarted);
     }
 };

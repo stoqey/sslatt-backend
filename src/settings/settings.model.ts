@@ -58,6 +58,18 @@ export class SiteSettings {
     @Field(() => String, { nullable: true })
     description?: string = "";
 
+    @Field(() => String, { nullable: true })
+    SITE_APPEARANCE?: string = "";
+
+    @Field(() => Boolean, { nullable: true })
+    REQUIRE_LOGIN?: boolean = true;
+
+    @Field(() => Boolean, { nullable: true })
+    ENABLE_ENDGAME?: boolean = true;
+
+    @Field(() => String, { nullable: true })
+    API_URL?: string = "";
+
     @Field(() => Number, { nullable: true })
     WITHDRAW_FEE_PERC?: number = 0;
 
@@ -153,6 +165,10 @@ export const siteSettingsClientSelectors = [
     "name",
     "slogan",
     "description",
+    "SITE_APPEARANCE",
+    "REQUIRE_LOGIN",
+    "ENABLE_ENDGAME",
+    "API_URL",
     "ENABLE_BTC",
     "ENABLE_XMR",
     "ENABLE_XMPP",

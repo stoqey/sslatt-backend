@@ -8,6 +8,7 @@
   "scripts": {
     "start": "node build/index",
     "dev": "nodemon src/index.ts",
+    "dev:xmr": "PORT=3033 nodemon src/monerox.app.ts",
     "test": "mocha src/*/*test.ts --exit",
     "clean": "rm -rf build",
     "build:server": "tsc --skipLibCheck",

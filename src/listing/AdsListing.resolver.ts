@@ -31,13 +31,15 @@ import { upsertSiteStats } from "../settings/settings.methods";
 @Resolver()
 export class AdsListingResolver {
 
-  @UseMiddleware(isAuth)
+  // TODO loginNotRequired
+  // @UseMiddleware(isAuth)
   @Query(() => AdsListingOutput, { nullable: true })
   async getAdListing(
     @Ctx() ctx: ContextType,
     @Arg("id", { nullable: false }) id: string
   ): Promise<AdsListingOutput | null> {
     try {
+      // TODO loginNotRequired
       const owner = _get(ctx, 'payload.userId', '');
       const bucket = connectionOptions.bucketName;
 

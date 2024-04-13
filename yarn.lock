@@ -763,17 +763,17 @@
     dotenv "^8.2.0"
     lodash "^4.17.20"
 
-"@roadmanjs/monerox@^0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@roadmanjs/monerox/-/monerox-0.0.4.tgz#66d1bba8d15103e3c972b5398c08f635e5e7aff6"
-  integrity sha512-jdpF/baQq+vSpS5OawMSDCPy3XDzTuXXS4dSELZNFOo+0CeFQRFgawLELIEIjw/qkn8dBasHS6bHnY1HDjKVyw==
+"@roadmanjs/monerox@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@roadmanjs/monerox/-/monerox-0.0.5.tgz#531a8c12b017c1fd18ef34054ec2b76169f9571a"
+  integrity sha512-kReurX+3VOi8iRGIxrLGnlxH6skC2LD7+7Hj02WMzOsdklx4Ong3D2IHfJtdIk+lqhdB7Pt+7BpPX8SXagP4hg==
   dependencies:
     cors "^2.8.5"
     dotenv "^16.3.1"
     express "^4.16.2"
     http-errors "^1.7.1"
     lodash "^4.17.21"
-    monero-ts "^0.9.4"
+    monero-ts "^0.9.7"
     morgan "^1.9.1"
     pug "^3.0.1"
     uuid "^9.0.1"
@@ -4198,7 +4198,7 @@ moment@^2.24.0, moment@^2.25.1, moment@^2.29.1, moment@^2.29.3:
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.30.1.tgz#f8c91c07b7a786e30c59926df530b4eac96974ae"
   integrity sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how==
 
-monero-ts@^0.9.4:
+monero-ts@^0.9.7:
   version "0.9.7"
   resolved "https://registry.yarnpkg.com/monero-ts/-/monero-ts-0.9.7.tgz#89dff91ba99721f07fda88fecd7c93bb30151d40"
   integrity sha512-YStuJuxS6MGNECIDqZYAztJcDTQZlYTfa9MSebNLhDBOoU9guMdphRwy/yhDd6DsYIaed6gflFMOq4hRuGA8Ow==

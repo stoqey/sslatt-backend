@@ -34,7 +34,7 @@
     "@roadmanjs/couchset": "^0.0.9",
     "@roadmanjs/firebase-admin": "^0.0.28",
     "@roadmanjs/fluxer": "^0.0.5",
-    "@roadmanjs/monerox": "^0.0.4",
+    "@roadmanjs/monerox": "^0.0.5",
     "@roadmanjs/social": "^0.0.28",
     "@roadmanjs/wallet": "^0.0.74",
     "apollo-server-express": "^3.12.1",

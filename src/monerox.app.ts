@@ -19,7 +19,7 @@ class ExampleResolver {
 
 const customRoadmanApp = async (args: RoadmanBuild): Promise<RoadmanBuild> => {
     const { app } = args;
-    app.use("/wallet", moneroxWalletRouter);
+    app.use("/wallet", moneroxWalletRouter());
     return args;
 }
 

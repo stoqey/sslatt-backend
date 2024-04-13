@@ -6,7 +6,7 @@ import "dotenv/config";
 import { Query, Resolver } from 'type-graphql';
 import { RoadmanBuild, roadman, log } from "roadman";
 import { walletRouter as moneroxWalletRouter, listenMain } from "@roadmanjs/monerox";
-import { initConfigSiteSettings } from "./settings/settings.methods";
+import { siteConfigSetEnv } from "./settings/settings.methods";
 
 @Resolver()
 class ExampleResolver {
@@ -25,7 +25,7 @@ const customRoadmanApp = async (args: RoadmanBuild): Promise<RoadmanBuild> => {
 
 const run = async () => {
 
-    await initConfigSiteSettings();
+    await siteConfigSetEnv();
 
     const roadmanStarted = await roadman({
         roadmen: [

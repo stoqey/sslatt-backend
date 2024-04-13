@@ -19,7 +19,7 @@ siteStatsQueue.process(async (job, done) => {
     done();
 });
 
-export const initConfigSiteSettings = async () => {
+export const siteConfigSetEnv = async () => {
     await couchsetRoadman(null as any);
     const siteSettings = await getSiteSettings();
     if (siteSettings) {
